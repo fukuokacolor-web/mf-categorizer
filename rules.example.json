@@ -1,0 +1,60 @@
+{
+  "version": "1.0",
+  "_comment": "MF再分類ルールのサンプル。このファイルを rules.json にコピーして、自分が使う店名を追記していく。`match` は部分一致(=「マルキョウ」と書けば「マルキョウ 松田店 福岡県」にもヒット)。",
+
+  "rules": [
+    {"match": "セブンイレブン",     "category": "食費",       "subcategory": "コンビニ"},
+    {"match": "ファミリーマート",   "category": "食費",       "subcategory": "コンビニ"},
+    {"match": "ローソン",           "category": "食費",       "subcategory": "コンビニ"},
+    {"match": "クイックペイプラス", "category": "食費",       "subcategory": "コンビニ"},
+    {"match": "イオン",             "category": "食費",       "subcategory": "食料品"},
+    {"match": "イトーヨーカドー",   "category": "食費",       "subcategory": "食料品"},
+    {"match": "西友",               "category": "食費",       "subcategory": "食料品"},
+    {"match": "ライフ",             "category": "食費",       "subcategory": "食料品"},
+    {"match": "シャトレーゼ",       "category": "食費",       "subcategory": "菓子・パン"},
+    {"match": "スターバックス",     "category": "食費",       "subcategory": "カフェ"},
+    {"match": "ドトール",           "category": "食費",       "subcategory": "カフェ"},
+    {"match": "COKEON",             "category": "食費",       "subcategory": "飲料"},
+
+    {"match": "ユニクロ",           "category": "衣服・美容", "subcategory": "衣服"},
+    {"match": "ZARA",               "category": "衣服・美容", "subcategory": "衣服"},
+
+    {"match": "イオンシネマ",       "category": "教養・娯楽", "subcategory": "映画"},
+    {"match": "TOHOシネマズ",       "category": "教養・娯楽", "subcategory": "映画"},
+
+    {"match": "ENEOS",              "category": "自動車",     "subcategory": "ガソリン"},
+    {"match": "出光",               "category": "自動車",     "subcategory": "ガソリン"},
+
+    {"match": "ダイソー",           "category": "日用品",     "subcategory": "日用品"},
+    {"match": "セリア",             "category": "日用品",     "subcategory": "日用品"},
+    {"match": "無印良品",           "category": "日用品",     "subcategory": "日用品"},
+
+    {"match": "JR",                 "category": "交通費",     "subcategory": "電車"},
+    {"match": "Suica",              "category": "交通費",     "subcategory": "電車"},
+
+    {"match": "APPLE COM BILL",     "category": "サブスク",   "subcategory": "サブスク"},
+    {"match": "Netflix",            "category": "サブスク",   "subcategory": "サブスク"},
+    {"match": "Spotify",            "category": "サブスク",   "subcategory": "サブスク"},
+
+    {"match": "通 帳",              "category": "現金・カード", "subcategory": "ATM引き出し"}
+  ],
+
+  "_amount_rules_comment": "店名は同じでも金額帯でカテゴリが違うケース用。上から順に判定し、max_amount 以下ならそのカテゴリ。最後の要素は max_amount 無しがデフォルト。ららぽーと方式=同じ場所で食事も買い物もする商業施設で便利。",
+
+  "amount_rules": [
+    {
+      "match": "ららぽーと",
+      "splits": [
+        {"max_amount": 1200, "category": "食費",       "subcategory": "外食"},
+        {                    "category": "衣服・美容", "subcategory": "衣服"}
+      ]
+    }
+  ],
+
+  "_unknown_comment": "ルールに無いものを Excel の『要確認』シートに出す時に、ヒント文字列を添えるための辞書。Phase B(Gmail連携)で品目展開する将来拡張用。",
+  "unknown_hints": [
+    {"match": "アマゾン", "hint": "Gmail の注文確認メールと突合すれば品目わかる(Phase B)"},
+    {"match": "Amazon",   "hint": "Gmail の注文確認メールと突合すれば品目わかる(Phase B)"},
+    {"match": "楽天",     "hint": "Gmail の注文確認メールと突合すれば品目わかる(Phase B)"}
+  ]
+}

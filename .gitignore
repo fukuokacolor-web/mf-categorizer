@@ -1,0 +1,24 @@
+# 個人の取引データは絶対にcommitしない
+output/
+*.csv
+*.xlsx
+
+# 各ユーザー固有の店名リスト(rules.example.json をコピーして使う)
+rules.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets
+.env
+.env.local
