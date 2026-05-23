@@ -25,6 +25,13 @@ import json
 import sys
 from pathlib import Path
 
+# Windows コンソール(cp932)でも絵文字が出せるよう stdout を utf-8 に再構成
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 try:
     from openpyxl import Workbook
     from openpyxl.styles import Font, PatternFill
